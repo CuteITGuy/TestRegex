@@ -1,0 +1,53 @@
+﻿USE [QAHosGenericDB]
+USE QAHosGenericDB
+GO
+
+-----------------------------DEBUG-----------------------------
+--SELECT * FROM [QAHosGenericDB]..CN_FacAdmissions
+--WHERE	PatientID = '0E74847E-C3CE-47E2-853C-912FEE6771F5'
+--		AND	FacAdmissionType = 'IP'
+-----------------------------DEBUG-----------------------------
+
+--Version: 1.0.0.2 hientm show warning if patient has just discharged
+--Ver: 1.0.0.0 hientm show warning if patient has just discharged
+--Version 1.0.0.1 hientm show warning if patient has just discharged
+--V: 1.0.0.3 hientm show warning if patient has just discharged
+IF OBJECT_ID(N'ws_CN_FacAdmissions_WarnJustDischargedPatient', N'P') IS NOT NULL
+	DROP PROCEDURE ws_CN_FacAdmissions_WarnJustDischargedPatient
+GO
+
+ALTER	PROC [dbo].[ws_CN_FacAdmissions_WarnJustDischargedPatient]
+ALTER	PROCEDURE [dbo].[ws_CN_FacAdmissions_WarnJustDischargedPatient]
+ALTER	PROC [ws_CN_FacAdmissions_WarnJustDischargedPatient]
+ALTER	PROCEDURE [ws_CN_FacAdmissions_WarnJustDischargedPatient]
+ALTER	PROC dbo.ws_CN_FacAdmissions_WarnJustDischargedPatient
+ALTER	PROCEDURE dbo.ws_CN_FacAdmissions_WarnJustDischargedPatient
+ALTER	PROC ws_CN_FacAdmissions_WarnJustDischargedPatient
+ALTER	PROCEDURE ws_CN_FacAdmissions_WarnJustDischargedPatient
+CREATE	PROC [dbo].[ws_CN_FacAdmissions_WarnJustDischargedPatient]
+CREATE	PROCEDURE [dbo].[ws_CN_FacAdmissions_WarnJustDischargedPatient]
+CREATE	PROC [ws_CN_FacAdmissions_WarnJustDischargedPatient]
+CREATE	PROCEDURE [ws_CN_FacAdmissions_WarnJustDischargedPatient]
+CREATE	PROC dbo.ws_CN_FacAdmissions_WarnJustDischargedPatient
+CREATE	PROCEDURE dbo.ws_CN_FacAdmissions_WarnJustDischargedPatient
+CREATE	PROC ws_CN_FacAdmissions_WarnJustDischargedPatient
+CREATE	PROCEDURE ws_CN_FacAdmissions_WarnJustDischargedPatient
+(
+	@SessionID	VARCHAR(MAX) ,
+    @PatientID	UNIQUEIDENTIFIER ,
+    @FacID		VARCHAR(10) = '1'
+)
+AS
+BEGIN
+	DECLARE	@dischargeDate	DATE
+	SELECT	@dischargeDate = CONVERT(DATE, MAX(DischargedOn))
+	FROM	dbo.CN_FacAdmissions WITH (NOLOCK)
+	WHERE	PatientID = @PatientID
+			AND	FacAdmissionType = 'IP'
+			AND FacID = @FacID
+	
+	SELECT	CASE WHEN @dischargeDate IS NOT NULL AND @dischargeDate = CONVERT(DATE, GETDATE())
+			THEN N'Bệnh nhân này mới xuất viện trong ngày. Bạn có muốn tiếp nhận bệnh nhân này không?'
+			ELSE N''
+			END
+END
