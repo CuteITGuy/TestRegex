@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CB.Model.Common">
+      <HintPath>..\..\CB.Model\CB.Model.Common\bin\Release\CB.Model.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -101,6 +104,10 @@
     <ProjectReference Include="..\RegexHandling\RegexHandling.csproj">
       <Project>{e2faed32-3c5e-4d73-ab93-0bda7392dc85}</Project>
       <Name>RegexHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RegexViewModel\RegexViewModel.csproj">
+      <Project>{76e6a697-1869-46ac-b597-e1c1c0cedd4d}</Project>
+      <Name>RegexViewModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\ValueConverters\ValueConverters.csproj">
       <Project>{a84a0111-3be9-4d9a-b3cd-adc39b5eb71c}</Project>

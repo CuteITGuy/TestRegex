@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using CB.Model.Common;
 
 
 namespace RegexHandling
 {
-    public class RegexHandler: INotifyPropertyChanged
+    public class RegexHandler: ObservableObject
     {
         #region Fields
         private const string CAN_BACKWARD_NAME = "CanBackward";
@@ -108,11 +107,6 @@ namespace RegexHandling
         #endregion
 
 
-        #region Events
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
-
-
         #region Methods
         public void Backward()
         {
@@ -187,11 +181,6 @@ namespace RegexHandling
             NotifyPropertyChanged(CAN_BACKWARD_NAME);
         }
 
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private void RestoreState()
         {
             Error = null;
@@ -200,15 +189,6 @@ namespace RegexHandling
             Result = null;
             CapturedGroups = null;
             SplittedStrings = null;
-        }
-
-        private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-
-            field = value;
-            NotifyPropertyChanged(propertyName);
-            return true;
         }
 
         private void SetResults()

@@ -6,10 +6,13 @@
         xmlns:me="clr-namespace:MarkupExtensions;assembly=MarkupExtensions"
         xmlns:rh="clr-namespace:RegexHandling;assembly=RegexHandling"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1000" FontSize="13" d:DataContext="{d:DesignInstance rh:RegexHandler}">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mdl="clr-namespace:RegexViewModel;assembly=RegexViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="1000" FontSize="13">
 
     <Window.Resources>
+        <mdl:RegexModel x:Key="Model"></mdl:RegexModel>
         <vc:NullityToVisibilityConverter x:Key="NullityConverter"
                                          ValueWhenNull="Collapsed"
                                          ValueWhenNotNull="Visible" />
@@ -54,6 +57,11 @@
             <Setter Property="Margin" Value="{StaticResource MarginNormal}" />
         </Style>
     </Window.Resources>
+    
+    <Window.DataContext>
+        <StaticResource ResourceKey="Model"></StaticResource>
+    </Window.DataContext>
+    
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFE3FFEC" Offset="0" />
@@ -84,37 +92,37 @@
 
         <ComboBox Grid.Row="0" Grid.Column="1"
                   ItemsSource="{me:EnumValues {x:Type rh:RegexMode}}"
-                  SelectedItem="{Binding Path=Mode}" />
+                  SelectedItem="{Binding Path=RegexHandler.Mode}" />
 
-        <TextBox x:Name="txtInput" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                  AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Foreground="Blue"
-                 Text="{Binding Path=Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=RegexHandler.Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Text="Pattern:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}" />
 
-        <TextBox x:Name="txtPattern" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                  Foreground="DarkGreen" FontWeight="Bold"
-                 Text="{Binding Path=Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=RegexHandler.Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Text="Replacement:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}"
-                   Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}" />
+                   Visibility="{Binding Path=RegexHandler.Mode, Converter={StaticResource ModeConverter}}" />
 
-        <TextBox x:Name="txtReplacement" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+        <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                  Foreground="DarkOrange" FontWeight="Bold"
-                 Text="{Binding Path=Replacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}" />
+                 Text="{Binding Path=RegexHandler.Replacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="{Binding Path=RegexHandler.Mode, Converter={StaticResource ModeConverter}}" />
 
         <TextBlock Text="Result:" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}" />
 
-        <TextBox x:Name="txtResult" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                  IsReadOnly="True" Foreground="Red" FontWeight="Bold"
-                 Text="{Binding Path=Result, Mode=OneWay}" />
+                 Text="{Binding Path=RegexHandler.Result, Mode=OneWay}" />
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="7"
-              Visibility="{Binding Path=CapturedGroups, Converter={StaticResource NullityConverter}}">
+              Visibility="{Binding Path=RegexHandler.CapturedGroups, Converter={StaticResource NullityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -123,11 +131,11 @@
             <TextBlock Text="Captured groups:" Grid.Row="0" Style="{StaticResource CaptionStyle}" />
 
             <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Path=CapturedGroups, Mode=OneWay}" />
+                     ItemsSource="{Binding Path=RegexHandler.CapturedGroups, Mode=OneWay}" />
         </Grid>
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="7"
-              Visibility="{Binding Path=SplittedStrings, Converter={StaticResource NullityConverter}}">
+              Visibility="{Binding Path=RegexHandler.SplittedStrings, Converter={StaticResource NullityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -136,21 +144,19 @@
             <TextBlock Text="Splitted strings:" Grid.Row="0" Style="{StaticResource CaptionStyle}" />
 
             <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Path=SplittedStrings, Mode=OneWay}" />
+                     ItemsSource="{Binding Path=RegexHandler.SplittedStrings, Mode=OneWay}" />
         </Grid>
 
         <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Vertical">
-            <Button x:Name="cmdNext" Content="Next Result"
-                    IsEnabled="{Binding Path=CanForward, Mode=OneWay}"
-                    Click="cmdNext_Click" />
+            <Button Content="Next Result"
+                    Command="{Binding NextCommand}" />
 
-            <Button x:Name="cmdPrevious" Content="Previous Result"
-                    IsEnabled="{Binding Path=CanBackward, Mode=OneWay}"
-                    Click="cmdPrevious_Click" />
+            <Button Content="Previous Result"
+                    Command="{Binding PreviousCommand}" />
         </StackPanel>
 
         <StatusBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBlock x:Name="txtError" Text="{Binding Error}" />
+            <TextBlock Text="{Binding RegexHandler.Error}" />
         </StatusBar>
     </Grid>
 </Window>
