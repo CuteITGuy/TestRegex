@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CB.Model.Common">
-      <HintPath>..\..\CB.Model\CB.Model.Common\bin\Release\CB.Model.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -97,17 +94,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
+      <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
+      <Name>CB.Model.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MarkupExtensions\MarkupExtensions.csproj">
       <Project>{3ec2a143-37f4-495a-b897-2ec09c447ecd}</Project>
       <Name>MarkupExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RegexHandling\RegexHandling.csproj">
-      <Project>{e2faed32-3c5e-4d73-ab93-0bda7392dc85}</Project>
-      <Name>RegexHandling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RegexViewModel\RegexViewModel.csproj">
-      <Project>{76e6a697-1869-46ac-b597-e1c1c0cedd4d}</Project>
-      <Name>RegexViewModel</Name>
+    <ProjectReference Include="..\RegexViewModels\RegexViewModels.csproj">
+      <Project>{3654add6-67ab-4e7a-bcba-68448f555cb8}</Project>
+      <Name>RegexViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\ValueConverters\ValueConverters.csproj">
       <Project>{a84a0111-3be9-4d9a-b3cd-adc39b5eb71c}</Project>

@@ -5,13 +5,13 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRegex", "TestRegex\TestRegex.csproj", "{1A40DFA6-3991-4019-BD34-A049F6078477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexHandling", "RegexHandling\RegexHandling.csproj", "{E2FAED32-3C5E-4D73-AB93-0BDA7392DC85}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueConverters", "ValueConverters\ValueConverters.csproj", "{A84A0111-3BE9-4D9A-B3CD-ADC39B5EB71C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupExtensions", "MarkupExtensions\MarkupExtensions.csproj", "{3EC2A143-37F4-495A-B897-2EC09C447ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexViewModel", "RegexViewModel\RegexViewModel.csproj", "{76E6A697-1869-46AC-B597-E1C1C0CEDD4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexViewModels", "RegexViewModels\RegexViewModels.csproj", "{3654ADD6-67AB-4E7A-BCBA-68448F555CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB.Model.Common", "..\CB.Model\CB.Model.Common\CB.Model.Common.csproj", "{33A5DF99-1312-4023-A6EF-EABB9848F5A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{1A40DFA6-3991-4019-BD34-A049F6078477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A40DFA6-3991-4019-BD34-A049F6078477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A40DFA6-3991-4019-BD34-A049F6078477}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2FAED32-3C5E-4D73-AB93-0BDA7392DC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2FAED32-3C5E-4D73-AB93-0BDA7392DC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2FAED32-3C5E-4D73-AB93-0BDA7392DC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2FAED32-3C5E-4D73-AB93-0BDA7392DC85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A84A0111-3BE9-4D9A-B3CD-ADC39B5EB71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A84A0111-3BE9-4D9A-B3CD-ADC39B5EB71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A84A0111-3BE9-4D9A-B3CD-ADC39B5EB71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +31,14 @@ Global
 		{3EC2A143-37F4-495A-B897-2EC09C447ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC2A143-37F4-495A-B897-2EC09C447ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC2A143-37F4-495A-B897-2EC09C447ECD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76E6A697-1869-46AC-B597-E1C1C0CEDD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76E6A697-1869-46AC-B597-E1C1C0CEDD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76E6A697-1869-46AC-B597-E1C1C0CEDD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76E6A697-1869-46AC-B597-E1C1C0CEDD4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3654ADD6-67AB-4E7A-BCBA-68448F555CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3654ADD6-67AB-4E7A-BCBA-68448F555CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3654ADD6-67AB-4E7A-BCBA-68448F555CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3654ADD6-67AB-4E7A-BCBA-68448F555CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A5DF99-1312-4023-A6EF-EABB9848F5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A5DF99-1312-4023-A6EF-EABB9848F5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A5DF99-1312-4023-A6EF-EABB9848F5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A5DF99-1312-4023-A6EF-EABB9848F5A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

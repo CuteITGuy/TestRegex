@@ -4,10 +4,9 @@
         xmlns:vc="clr-namespace:ValueConverters;assembly=ValueConverters"
         xmlns:vci="clr-namespace:ValueConverters.Impl;assembly=ValueConverters"
         xmlns:me="clr-namespace:MarkupExtensions;assembly=MarkupExtensions"
-        xmlns:rh="clr-namespace:RegexHandling;assembly=RegexHandling"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mdl="clr-namespace:RegexViewModel;assembly=RegexViewModel"
+        xmlns:mdl="clr-namespace:RegexViewModels;assembly=RegexViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="1000" FontSize="13">
 
@@ -21,7 +20,7 @@
                              DefaultConvertResult="{x:Static Visibility.Collapsed}">
             <vc:GeneralConverter.ConvertMapping>
                 <vci:GeneralDictionary>
-                    <Visibility x:Key="{x:Static rh:RegexMode.Replace}">Visible</Visibility>
+                    <Visibility x:Key="{x:Static mdl:RegexMode.Replace}">Visible</Visibility>
                 </vci:GeneralDictionary>
             </vc:GeneralConverter.ConvertMapping>
         </vc:GeneralConverter>
@@ -91,38 +90,38 @@
         <TextBlock Text="Input:" Grid.Row="0" Grid.Column="0" Style="{StaticResource CaptionStyle}" />
 
         <ComboBox Grid.Row="0" Grid.Column="1"
-                  ItemsSource="{me:EnumValues {x:Type rh:RegexMode}}"
-                  SelectedItem="{Binding Path=RegexHandler.Mode}" />
+                  ItemsSource="{me:EnumValues {x:Type mdl:RegexMode}}"
+                  SelectedItem="{Binding Path=Mode}" />
 
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                  AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Foreground="Blue"
-                 Text="{Binding Path=RegexHandler.Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Text="Pattern:" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}" />
 
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                  Foreground="DarkGreen" FontWeight="Bold"
-                 Text="{Binding Path=RegexHandler.Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock Text="Replacement:" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}"
-                   Visibility="{Binding Path=RegexHandler.Mode, Converter={StaticResource ModeConverter}}" />
+                   Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}" />
 
         <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                  Foreground="DarkOrange" FontWeight="Bold"
-                 Text="{Binding Path=RegexHandler.Replacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Visibility="{Binding Path=RegexHandler.Mode, Converter={StaticResource ModeConverter}}" />
+                 Text="{Binding Path=Replacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}" />
 
         <TextBlock Text="Result:" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                    Style="{StaticResource CaptionStyle}" />
 
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                  IsReadOnly="True" Foreground="Red" FontWeight="Bold"
-                 Text="{Binding Path=RegexHandler.Result, Mode=OneWay}" />
+                 Text="{Binding Path=Result, Mode=OneWay}" />
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="7"
-              Visibility="{Binding Path=RegexHandler.CapturedGroups, Converter={StaticResource NullityConverter}}">
+              Visibility="{Binding Path=CapturedGroups, Converter={StaticResource NullityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -131,11 +130,11 @@
             <TextBlock Text="Captured groups:" Grid.Row="0" Style="{StaticResource CaptionStyle}" />
 
             <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Path=RegexHandler.CapturedGroups, Mode=OneWay}" />
+                     ItemsSource="{Binding Path=CapturedGroups, Mode=OneWay}" />
         </Grid>
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="7"
-              Visibility="{Binding Path=RegexHandler.SplittedStrings, Converter={StaticResource NullityConverter}}">
+              Visibility="{Binding Path=SplittedStrings, Converter={StaticResource NullityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -144,19 +143,19 @@
             <TextBlock Text="Splitted strings:" Grid.Row="0" Style="{StaticResource CaptionStyle}" />
 
             <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Path=RegexHandler.SplittedStrings, Mode=OneWay}" />
+                     ItemsSource="{Binding Path=SplittedStrings, Mode=OneWay}" />
         </Grid>
 
         <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Vertical">
             <Button Content="Next Result"
-                    Command="{Binding NextCommand}" />
+                    Command="{Binding Path=NextCommand}" />
 
             <Button Content="Previous Result"
-                    Command="{Binding PreviousCommand}" />
+                    Command="{Binding Path=PreviousCommand}" />
         </StackPanel>
 
         <StatusBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBlock Text="{Binding RegexHandler.Error}" />
+            <TextBlock Text="{Binding Error}" />
         </StatusBar>
     </Grid>
 </Window>
